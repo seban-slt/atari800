@@ -376,7 +376,7 @@ jobs:
 
   build-macos-arm64:
     name: Build on MacOS (arm64 slice)
-    runs-on: macos-14
+    runs-on: macos-15
 
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
@@ -531,7 +531,7 @@ jobs:
 
   package-macos:
     name: Package MacOS (universal)
-    runs-on: macos-14
+    runs-on: macos-15
     needs: [build-macos-arm64, build-macos-x86_64]
 
     steps:
