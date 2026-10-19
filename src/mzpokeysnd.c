@@ -2082,6 +2082,13 @@ static void Update_pokey_sound_mz(UWORD addr, UBYTE val, UBYTE chip, UBYTE gain)
         ps->c1t2 = 0;
         ps->c2t2 = 1;
         ps->c3t2 = 1;
+        /* STIMER changes the waveform output immediately. Refresh the
+           cached channel levels before the next timer event. */
+        Update_c0stop(ps);
+        Update_c1stop(ps);
+        Update_c2stop(ps);
+        Update_c3stop(ps);
+        ps->forcero = 1;
         break;
     case POKEY_OFFSET_SKCTL:
         Update_skctl(ps,val);
