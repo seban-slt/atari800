@@ -2538,15 +2538,11 @@ static void CrtGlowSliderLabel(char *label, int value, void *user_data) {
 #endif /* HAVE_OPENGL && SDL2 */
 #endif /* GUI_SDL */
 
-#if SDL2
+#if SDL2 && HAVE_OPENGL
 static void show_hide_crt_options(UI_tMenuItem menu_array[]) {
 	// hide/show options that require hardware renderer (and shaders)
 	for (int index = 19; index <= 21; ++index) {
-#if HAVE_OPENGL
 		FindMenuItem(menu_array, index)->flags = !SDL_VIDEO_opengl ? UI_ITEM_HIDDEN : UI_ITEM_SUBMENU;
-#else
-		FindMenuItem(menu_array, index)->flags = UI_ITEM_HIDDEN;
-#endif
 	}
 }
 #endif
@@ -2727,7 +2723,7 @@ static void VideoModeSettings(void)
 		}
 		snprintf(horiz_offset_string, sizeof(horiz_offset_string), "%d", VIDEOMODE_horizontal_offset);
 		snprintf(vert_offset_string, sizeof(vert_offset_string), "%d", VIDEOMODE_vertical_offset);
-#if SDL2
+#if SDL2 && HAVE_OPENGL
 		show_hide_crt_options(menu_array);
 #endif
 
